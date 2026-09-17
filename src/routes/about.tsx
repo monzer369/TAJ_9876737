@@ -1,0 +1,17 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageIntro, SectionHeading } from "@/components/section";
+import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/i18n";
+
+export const Route = createFileRoute("/about")({
+  head: () => ({ meta: [
+    { title: "About TAJ | Custom Metal Fabrication UAE" }, { name: "description", content: "TAJ specializes in custom metal fabrication and installation with a focus on precision, safety and modern design." },
+    { property: "og:title", content: "About TAJ Engineering & Metal Fabrication" }, { property: "og:description", content: "A workshop-led approach to bespoke metalwork for premium UAE projects." }, { property: "og:type", content: "website" }, { property: "og:url", content: "/about" }, { name: "twitter:card", content: "summary_large_image" },
+  ], links: [{ rel: "canonical", href: "/about" }] }), component: AboutPage,
+});
+function AboutPage() {
+  const { language } = useLanguage();
+  return <><PageIntro eyebrow={{ ar: "عن TAJ", en: "About TAJ" }} title={{ ar: "من الفكرة والقياس إلى التصنيع والتركيب", en: "From concept and measurement to fabrication and installation" }} text={{ ar: "TAJ جهة متخصصة في تصنيع وتنفيذ الأعمال المعدنية والحلول المخصصة، مع تركيز واضح على الدقة والأمان وجودة التنفيذ والتصميم الحديث.", en: "TAJ specializes in the fabrication and execution of bespoke metalwork, with a clear focus on precision, safety, quality and modern design." }} />
+  <section className="section-shell"><SectionHeading eyebrow={{ ar: "منهجنا", en: "Our Approach" }} title={{ ar: "كل مشروع يبدأ من متطلباته الحقيقية", en: "Every project begins with its real requirements" }} text={{ ar: "لا نفترض أن حلًا واحدًا يناسب الجميع. نفهم الموقع، نأخذ القياسات، نحدد المواد والتشطيبات، ثم ننتقل إلى التصنيع والتركيب.", en: "We do not assume one solution fits all. We assess the site, measure, define materials and finishes, then fabricate and install." }} /><div className="grid gap-px border border-border bg-border md:grid-cols-3">{[{ar:"الدقة",en:"Precision",ad:"قياسات وتفاصيل مرتبطة بالموقع.",ed:"Measurements and details tied to the site."},{ar:"الأمان",en:"Safety",ad:"حلول تراعي الاستخدام العملي.",ed:"Solutions shaped around practical use."},{ar:"التنفيذ",en:"Execution",ad:"تصنيع وتركيب ضمن مسؤولية واحدة.",ed:"Fabrication and installation under one responsibility."}].map(x=><div key={x.en} className="bg-background p-8"><h2 className="font-display text-3xl font-semibold">{language === "ar" ? x.ar : x.en}</h2><p className="mt-4 text-muted-foreground">{language === "ar" ? x.ad : x.ed}</p></div>)}</div></section>
+  <section className="bg-primary text-primary-foreground"><div className="section-shell flex flex-col items-start justify-between gap-8 md:flex-row md:items-center"><div><p className="text-sm uppercase">10-Year Warranty</p><h2 className="mt-3 max-w-3xl font-display text-3xl font-semibold">{language === "ar" ? "ضمان لمدة 10 سنوات على الأعمال — الدهان غير مشمول بالضمان." : "10-year warranty on our work — paint excluded."}</h2></div><Button variant="outline" asChild><Link to="/contact">{language === "ar" ? "ناقش مشروعك" : "Discuss your project"}</Link></Button></div></section></>;
+}
